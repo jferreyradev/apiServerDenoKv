@@ -1,7 +1,15 @@
 import { Hono } from "https://deno.land/x/hono@v3.4.1/mod.ts";
+import { cors } from "https://deno.land/x/hono/middleware.ts";
 
 const app = new Hono();
 const kv = await Deno.openKv();
+
+// Usar el middleware de CORS
+app.use('*', cors({
+  origin: '*',  // Permitir cualquier origen
+  methods: ['GET', 'POST', 'DELETE','OPTIONS'],  // Permitir estos métodos
+  headers: ['Content-Type']  // Permitir estos encabezados
+}));
 
 // Redirect root URL
 app.get("/", (c) => c.redirect("/items"));
