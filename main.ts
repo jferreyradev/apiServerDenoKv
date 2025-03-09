@@ -33,7 +33,7 @@ app.post("/items", async (c) => {
 // Get a item by id
 app.get("/items/:id", async (c) => {
   const id = c.req.param("id");
-  const result = await kv.get(["id", id]);
+  const result = await kv.get(["items",id]);
   return c.json(result);
 });
 
